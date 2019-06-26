@@ -3,24 +3,29 @@
 const path = require('path');
 const HtmlwebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     entry:{
         app:'./src/index.js',
-        print:'./src/print.js'
     },
     output:{
         filename:'[name].bundle.js',
-        path:path.resolve(__dirname,'dist')
+        path:path.resolve(__dirname,'dist'),
+        publicPath: '/'
     },
     plugins:[
-        new HtmlwebpackPlugin({title:'hello output file'}),
-        new CleanWebpackPlugin()
+        new HtmlwebpackPlugin({
+            template:'./src/aaa.html',
+            title:'new File Name',
+            filename:'./src/view/a.html',
+        }),
+        new CleanWebpackPlugin(),
     ],
     devServer:{
-        contentBase:'./dist'
+        contentBase:'./dist',
+        hot: true
     },
-    publicPath:'/'
 }
 
 
